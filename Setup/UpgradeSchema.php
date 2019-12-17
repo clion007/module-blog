@@ -83,7 +83,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-
         if (version_compare($version, '2.2.5') < 0) {
             /* Add layout field to posts and category table */
             foreach (['magefan_blog_post', 'magefan_blog_category'] as $table) {
@@ -489,7 +488,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
-
         if (version_compare($version, '2.6.3.1') < 0) {
             /* Add include in recent posts into post table */
             $connection->addColumn(
@@ -607,7 +605,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
 
-
             $connection->addColumn(
                 $setup->getTable($table),
                 'layout_update_xml',
@@ -707,12 +704,38 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     'length' => 255,
                     'nullable' => true,
-                    'comment' => 'Tag Degault Robots',
+                    'comment' => 'Tag Default Robots',
                     'after' => 'title'
                 ]
             );
         }
 
+        if (version_compare($version, '2.9.1') < 0) {
+            $table = $setup->getTable('magefan_blog_post');
+            $connection->addColumn(
+                $setup->getTable($table),
+                'featured_img_alt',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'Featured Image Alt',
+                    'after' => 'featured_img'
+                ]
+            );
+
+            $connection->addColumn(
+                $setup->getTable($table),
+                'comments_count',
+                [
+                    'type' =>\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => null,
+                    'nullable' => true,
+                    'comment' => 'Post Comment Counts'
+
+                ]
+            );
+        }
         $setup->endSetup();
     }
 }

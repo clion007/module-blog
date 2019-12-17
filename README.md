@@ -3,7 +3,13 @@
 [![Total Downloads](https://poser.pugx.org/magefan/module-blog/downloads)](https://packagist.org/packages/magefan/module-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/module-blog/v/stable)](https://packagist.org/packages/magefan/module-blog)
 
-This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows you to create a full-fledged blog on your [Magento 2](http://magento.com/) Store.
+This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows you to create a full-fledged blog on your Magento 2 Store.
+
+## Requirements
+  * Magento Community Edition 2.2.0-2.3.x or Magento Enterprise Edition 2.2.0-2.3.x
+  * [Magefan Community Extension](https://github.com/magefan/module-community) >= v2.0.8 . Please install this extension first if you use installation via FTP.
+  * **ATTENTION!** Latest available version for Magento 2.1.x is Blog v2.9.0.1
+
 
 
 ## Editions & Pricing
@@ -15,6 +21,7 @@ This [Magento 2 Blog module](https://magefan.com/magento2-blog-extension) allows
         </a>
         
 ## Features
+  * **NEW!** Blog GraphQL
   * Unlimited blog posts, multi-level categories, and tags
   * Multilanguage and Multiple Websites Support
   * Facebook, Disqus, Google+, and Magefan Magento Comments
@@ -88,15 +95,10 @@ Try out our open demo and if you like our extension **please give us some star o
   </tbody>
 </table>
 
-## Requirements
-  * Magento Community Edition 2.1.0-2.3.x or Magento Enterprise Edition 2.1.0-2.3.x
-  * **IMPORTANT!** [Magefan Community Extension](https://github.com/magefan/module-community) >= 2.0.4 . Please install this extension first if you use installation via FTP.
-
 ## Add-ons
+  * [Blog GraphQL for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-graph-ql)
   * [Blog Comments ReCaptcha by Magefan](https://github.com/magefan/module-blog-comments-recaptcha)
-  * [Blog Graph Gl for Magneto 2.2.x by Magefan](https://github.com/magefan/module-blog-graph-ql)
   * [ElasticSuite Blog search for Magento 2 by Comwrap](https://github.com/comwrap/Comwrap_ElasticsuiteBlog)
-  * [Blog Media Gallery for Magneto 2.2.x by Magefan DEPRECATED](https://github.com/magefan/module-blog-m22)
 
 
 ## Online Documentation
@@ -122,7 +124,7 @@ https://magefan.com/contact
 ## License
 The code is licensed under [EULA](https://magefan.com/end-user-license-agreement).
 
-## Other Magento 2 Extensions by Magefan
+## Other [Magento 2 Extensions](https://magefan.com/magento2-extensions) by Magefan
   * [Magento 2 Blog Plus Extension](https://magefan.com/magento2-blog-extension/pricing)
   * [Magento 2 Blog Extra Extension](https://magefan.com/magento2-blog-extension/pricing)
   * [Magento 2 Login As Customer Extension](https://magefan.com/login-as-customer-magento-2-extension)
@@ -137,3 +139,6 @@ The code is licensed under [EULA](https://magefan.com/end-user-license-agreement
   * [Magento 2 Lazy Load Extension](https://magefan.com/magento-2-image-lazy-load-extension)
   * [Magento 2 Rocket JavaScript Extension](https://magefan.com/rocket-javascript-deferred-javascript)
   * [Magento 2 CLI Extension](https://magefan.com/magento2-cli-extension)
+  * [Magento Twitter Cards Extension](https://magefan.com/magento-2-twitter-cards-extension)
+  * [Magento 2 Mautic Integration Extension](https://magefan.com/magento-2-mautic-extension)
+  * [Magento 2 Alternate Hreflang Extension](https://magefan.com/magento2-alternate-hreflang-extension)

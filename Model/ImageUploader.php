@@ -42,7 +42,16 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
         $basePath,
         $allowedExtensions
     ) {
-        parent::__construct($coreFileStorageDatabase, $filesystem, $uploaderFactory, $storeManager, $logger, $baseTmpPath, $basePath, $allowedExtensions);
+        parent::__construct(
+            $coreFileStorageDatabase,
+            $filesystem,
+            $uploaderFactory,
+            $storeManager,
+            $logger,
+            $baseTmpPath,
+            $basePath,
+            $allowedExtensions
+        );
         $this->filesystem = $filesystem;
     }
 

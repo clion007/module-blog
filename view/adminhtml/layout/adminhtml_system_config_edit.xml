@@ -7,7 +7,8 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<page layout="pramp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="amp_blog_default"/>
-    <update handle="amp_blog_post_list"/>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="jquery/colorpicker/css/colorpicker.css"/>
+    </head>
 </page>

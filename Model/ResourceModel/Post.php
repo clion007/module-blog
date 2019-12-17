@@ -106,7 +106,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         $identifierGenerator = \Magento\Framework\App\ObjectManager::getInstance()
-                ->create('Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator');
+                ->create(\Magefan\Blog\Model\ResourceModel\PageIdentifierGenerator::class);
         $identifierGenerator->generate($object);
 
         if (!$this->isValidPageIdentifier($object)) {
@@ -118,6 +118,13 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if ($this->isNumericPageIdentifier($object)) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 __('The post URL key cannot be made of only numbers.')
+            );
+        }
+
+        $id = $this->checkIdentifier($object->getData('identifier'), $object->getData('store_ids'));
+        if ($id && $id !== $object->getId()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('URL key is already in use by another blog item.')
             );
         }
 
@@ -198,6 +205,19 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @param \Magento\Framework\Model\AbstractModel $object
+     */
+    public function incrementViewsCount(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $this->getConnection()->update(
+            $this->getMainTable(),
+            ['views_count' => $object->getData('views_count') + 1],
+            ['post_id = ?' => $object->getId()]
+        );
+    }
+
+    /**
      * Update post connections
      * @param  \Magento\Framework\Model\AbstractModel $object
      * @param  Array $newRelatedIds
@@ -274,7 +294,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     public function load(\Magento\Framework\Model\AbstractModel $object, $value, $field = null)
     {
-        if (!is_numeric($value) && is_null($field)) {
+        if (!is_numeric($value) && null === $field) {
             $field = 'identifier';
         }
 
@@ -349,7 +369,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function isValidPageIdentifier(\Magento\Framework\Model\AbstractModel $object)
     {
-        return preg_match('/^([^?#<>@!&*()$%^\\/+=,{}]+)?$/', $object->getData('identifier'));
+        return preg_match('/^([^?#<>@!&*()$%^\\+=,{}]+)?$/', $object->getData('identifier'));
     }
 
     /**
@@ -437,7 +457,6 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function _lookupIds($postId, $tableName, $field)
     {
         $adapter = $this->getConnection();
-
         $select = $adapter->select()->from(
             $this->getTable($tableName),
             $field

@@ -119,7 +119,6 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
         ];
     }
 
-
     /**
      * Initialize resource model
      *
@@ -127,7 +126,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Comment');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Comment::class);
     }
 
     /**
@@ -238,7 +237,7 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
      */
     public function getChildComments()
     {
-        if (is_null($this->comments)) {
+        if (null === $this->comments) {
             $this->comments = $this->commentCollectionFactory->create()
                 ->addFieldToFilter('parent_id', $this->getId());
         }
@@ -253,16 +252,6 @@ class Comment extends AbstractModel implements \Magento\Framework\DataObject\Ide
     public function isReply()
     {
         return (bool)$this->getParentId();
-    }
-
-    /**
-     * Save the comment
-     * @return this
-     */
-    public function save()
-    {
-        $this->validate();
-        return parent::save();
     }
 
     /**

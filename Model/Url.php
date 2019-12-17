@@ -30,7 +30,6 @@ class Url
     const CONTROLLER_RSS = 'rss';
     const CONTROLLER_TAG = 'tag';
 
-
     /**
      * @var \Magento\Framework\Registry
      */
@@ -169,10 +168,10 @@ class Url
         $currentStore = $this->_storeManager->getStore($object->getStoreId());
 
         if (is_array($storeIds)) {
-            if (0 == array_values($storeIds)[0]) {
+            if (in_array(0, $storeIds)) {
                 $useOtherStore = true;
                 $newStore = $currentStore->getGroup()->getDefaultStore();
-            } elseif (count($storeIds) > 1) {
+            } else {
                 foreach ($storeIds as $storeId) {
                     //if ($storeId != $currentStore->getId()) {
                         $store = $this->_storeManager->getStore($storeId);
@@ -191,6 +190,7 @@ class Url
             $origStore = $this->_url->getScope();
             if ($newStore->getId() != $origStore->getId()) {
                 $this->_url->setScope($newStore);
+                $this->setStoreId($newStore->getId());
                 $storeChanged = true;
             }
         }
@@ -199,6 +199,7 @@ class Url
 
         if ($storeChanged) {
             $this->_url->setScope($origStore);
+            $this->setStoreId($origStore->getId());
         }
 
         return $url;
@@ -224,7 +225,9 @@ class Url
         $identifier = $this->getExpandedItentifier($identifier);
         switch ($this->getPermalinkType()) {
             case self::PERMALINK_TYPE_DEFAULT:
-                $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
+                $path = $this->getRoute() .
+                    '/' . $this->getRoute($controllerName) .
+                    '/' . $identifier . ( $identifier ? '/' : '');
                 break;
             case self::PERMALINK_TYPE_SHORT:
                 if ($controllerName == self::CONTROLLER_SEARCH
@@ -232,7 +235,9 @@ class Url
                     || $controllerName == self::CONTROLLER_TAG
                     || $controllerName == self::CONTROLLER_RSS
                 ) {
-                    $path = $this->getRoute() . '/' . $this->getRoute($controllerName) . '/' . $identifier . ( $identifier ? '/' : '');
+                    $path = $this->getRoute() .
+                        '/' . $this->getRoute($controllerName) .
+                        '/' . $identifier . ( $identifier ? '/' : '');
                 } else {
                     $path = $this->getRoute() . '/' . $identifier . ( $identifier ? '/' : '');
                 }
